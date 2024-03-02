@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://dw16nw5ikya4j"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_4km50"]
+[ext_resource type="PackedScene" uid="uid://pbmyh1qru7p" path="res://characters/happy_boo/happy_boo.tscn" id="1_60hu4"]
+[ext_resource type="PackedScene" uid="uid://dhlvtautch0y6" path="res://gun.tscn" id="3_ivrcp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_byduy"]
+radius = 33.0606
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_prxlm"]
+radius = 37.2156
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7h0j8"]
+bg_color = Color(0.231373, 0.231373, 0.231373, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n7akg"]
+bg_color = Color(0.309804, 0.698039, 0.337255, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_4km50")
+
+[node name="HappyBoo" parent="." instance=ExtResource("1_60hu4")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -10)
+shape = SubResource("CircleShape2D_byduy")
+
+[node name="Gun" parent="." instance=ExtResource("3_ivrcp")]
+position = Vector2(0, -54)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="HurtBox" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(1, -5)
+shape = SubResource("CircleShape2D_prxlm")
+debug_color = Color(0.909804, 0.207843, 0.54902, 0.419608)
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = -134.0
+offset_top = -142.0
+offset_right = 137.0
+offset_bottom = -115.0
+theme_override_styles/background = SubResource("StyleBoxFlat_7h0j8")
+theme_override_styles/fill = SubResource("StyleBoxFlat_n7akg")
+value = 100.0
+show_percentage = false
